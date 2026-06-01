@@ -1,15 +1,15 @@
 :root {
   color-scheme: light;
-  --bg: #f4f7f8;
+  --bg: #f3f2f6;
   --card: #ffffff;
-  --text: #14213d;
-  --muted: #5c6a75;
-  --line: #d6dee3;
-  --green: #1f7a6d;
-  --green-soft: #e8f3f1;
-  --red: #e84f3d;
-  --amber: #f1b84b;
-  --shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+  --text: #171a2f;
+  --muted: #667085;
+  --line: #d9d7e3;
+  --green: #25345f;
+  --green-soft: #ececf6;
+  --red: #6f5a8e;
+  --amber: #b7a0c7;
+  --shadow: 0 12px 28px rgba(23, 26, 47, 0.1);
 }
 
 * {
@@ -24,8 +24,8 @@ body {
   margin: 0;
   min-height: 100vh;
   background:
-    radial-gradient(circle at 100% 0%, rgba(31, 122, 109, 0.12), transparent 34rem),
-    linear-gradient(180deg, #eef5f5 0%, var(--bg) 26rem);
+    radial-gradient(circle at 100% 0%, rgba(111, 90, 142, 0.16), transparent 34rem),
+    linear-gradient(180deg, #ebeaf2 0%, var(--bg) 26rem);
   color: var(--text);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
@@ -37,6 +37,11 @@ input {
 
 button {
   -webkit-tap-highlight-color: transparent;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
 }
 
 .app-shell {
@@ -89,7 +94,7 @@ h1 {
   flex: 0 0 78px;
   height: 78px;
   border-radius: 50%;
-  background: conic-gradient(from 35deg, var(--green), #2e9a80, var(--amber), var(--red), var(--green));
+  background: conic-gradient(from 35deg, #171a2f, #25345f, var(--amber), var(--red), #171a2f);
   box-shadow: var(--shadow);
 }
 
@@ -124,6 +129,21 @@ h1 {
   gap: 12px;
 }
 
+.section-subtitle,
+.mini-label {
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.mini-label {
+  max-width: 46%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 h2 {
   font-size: 20px;
   font-weight: 900;
@@ -149,6 +169,118 @@ h2 {
   padding: 9px 12px;
 }
 
+.session-form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.session-form button {
+  border: 0;
+  border-radius: 8px;
+  background: var(--red);
+  color: #ffffff;
+  padding: 0 14px;
+  font-weight: 900;
+}
+
+.session-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.session-actions button {
+  min-height: 48px;
+  border: 0;
+  border-radius: 8px;
+  color: #ffffff;
+  font-weight: 900;
+}
+
+.start-button {
+  background: var(--green);
+}
+
+.finish-button {
+  background: #171a2f;
+}
+
+.session-metrics {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 10px;
+  border-radius: 8px;
+  background: #f1edf7;
+  padding: 10px 12px;
+}
+
+.session-metrics span {
+  color: #6f5a8e;
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.session-metrics strong {
+  color: var(--text);
+  font-size: 18px;
+  font-weight: 950;
+}
+
+.session-strip {
+  display: grid;
+  grid-auto-columns: minmax(132px, 42%);
+  grid-auto-flow: column;
+  gap: 8px;
+  margin-top: 12px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  scrollbar-width: none;
+}
+
+.session-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.session-strip button {
+  display: grid;
+  gap: 4px;
+  min-height: 58px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #ffffff;
+  color: var(--text);
+  padding: 10px;
+  text-align: left;
+}
+
+.session-strip button.active {
+  border-color: var(--green);
+  background: var(--green-soft);
+}
+
+.session-strip strong,
+.session-strip span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.session-strip strong {
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.session-strip span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 750;
+}
+
 .exercise-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -156,19 +288,49 @@ h2 {
   margin-top: 12px;
 }
 
-.exercise-grid button {
+.exercise-item {
+  position: relative;
+  min-width: 0;
+}
+
+.exercise-select {
+  width: 100%;
   min-height: 44px;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: #ffffff;
-  color: #26323c;
+  color: #24263c;
   font-size: 15px;
   font-weight: 800;
+  padding: 7px 27px 7px 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.exercise-grid button.active {
+.exercise-select.active {
   border-color: var(--green);
   background: var(--green);
+  color: #ffffff;
+}
+
+.exercise-delete {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(20, 33, 61, 0.08);
+  color: #4d5b67;
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.exercise-select.active + .exercise-delete {
+  background: rgba(255, 255, 255, 0.22);
   color: #ffffff;
 }
 
@@ -198,7 +360,7 @@ input:focus {
 .add-exercise button {
   border: 0;
   border-radius: 8px;
-  background: #26323c;
+  background: #171a2f;
   color: #ffffff;
   padding: 0 14px;
   font-weight: 850;
@@ -220,7 +382,7 @@ input:focus {
 }
 
 .stat.accent {
-  background: #fff4e2;
+  background: #f1edf7;
 }
 
 .stat span {
@@ -277,28 +439,64 @@ label span {
   gap: 10px;
 }
 
-.entry-card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+.session-card {
   border-radius: 8px;
   background: #ffffff;
   padding: 14px;
   box-shadow: var(--shadow);
 }
 
-.entry-card h3 {
+.session-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #edf1f3;
+}
+
+.session-card h3 {
   font-size: 17px;
   font-weight: 900;
 }
 
-.entry-meta,
+.session-card-head p,
+.entry-row p,
 .entry-note {
   margin-top: 5px;
   color: var(--muted);
   font-size: 13px;
   line-height: 1.35;
+}
+
+.session-card-head strong {
+  flex: 0 0 auto;
+  border-radius: 8px;
+  background: #f1edf7;
+  color: #6f5a8e;
+  padding: 7px 9px;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.session-entries {
+  display: grid;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.entry-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.entry-row h4 {
+  margin: 0;
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 900;
 }
 
 .entry-note {
@@ -333,7 +531,7 @@ label span {
   text-align: center;
 }
 
-@media (max-width: 360px) {
+  @media (max-width: 360px) {
   .app-shell {
     padding-left: 12px;
     padding-right: 12px;
@@ -341,6 +539,10 @@ label span {
 
   .exercise-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .session-strip {
+    grid-auto-columns: minmax(126px, 58%);
   }
 
   .plate-mark {

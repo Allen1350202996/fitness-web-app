@@ -10,7 +10,7 @@
     <title>渐进训练</title>
     <link rel="manifest" href="manifest.webmanifest" />
     <link rel="apple-touch-icon" href="icon-192.png" />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=4" />
   </head>
   <body>
     <main class="app-shell">
@@ -18,7 +18,7 @@
         <div>
           <p class="eyebrow">Progressive Overload</p>
           <h1>渐进训练</h1>
-          <p class="subtitle">每次记录重量，下一次知道该加多少。</p>
+          <p class="subtitle">把一次训练里的多个动作放在同一个集合里。</p>
         </div>
         <div class="plate-mark" aria-hidden="true">
           <span></span>
@@ -26,10 +26,33 @@
         </div>
       </header>
 
+      <section class="panel" aria-labelledby="session-title">
+        <div class="section-row">
+          <div>
+            <h2 id="session-title">训练集合</h2>
+            <p class="section-subtitle" id="activeSessionSummary">今天的训练</p>
+          </div>
+          <button class="icon-button" id="exportButton" type="button" aria-label="导出记录">⇩</button>
+        </div>
+        <form class="session-form" id="sessionForm">
+          <input id="sessionInput" autocomplete="off" placeholder="比如：胸肩三头、下肢力量、背部训练" />
+          <button type="submit">新建集合</button>
+        </form>
+        <div class="session-actions">
+          <button class="start-button" id="startButton" type="button">开始训练</button>
+          <button class="finish-button" id="finishButton" type="button">结束训练</button>
+        </div>
+        <div class="session-metrics" aria-label="当前训练统计">
+          <span id="sessionStatus">未开始</span>
+          <strong id="sessionVolume">0 kg·次</strong>
+        </div>
+        <div class="session-strip" id="sessionStrip"></div>
+      </section>
+
       <section class="panel" aria-labelledby="exercise-title">
         <div class="section-row">
           <h2 id="exercise-title">训练动作</h2>
-          <button class="icon-button" id="exportButton" type="button" aria-label="导出记录">⇩</button>
+          <span class="mini-label" id="selectedSessionLabel"></span>
         </div>
         <div class="exercise-grid" id="exerciseGrid"></div>
         <form class="add-exercise" id="exerciseForm">
@@ -54,7 +77,7 @@
       </section>
 
       <section class="panel" aria-labelledby="new-log-title">
-        <h2 id="new-log-title">新增训练</h2>
+        <h2 id="new-log-title">添加到当前集合</h2>
         <form id="entryForm" class="entry-form">
           <label>
             <span>重量 kg</span>
@@ -76,33 +99,32 @@
             <span>备注</span>
             <input id="noteInput" autocomplete="off" placeholder="比如：最后一组还剩 1 次余力" />
           </label>
-          <button class="primary-button" type="submit">保存这次训练</button>
+          <button class="primary-button" id="saveEntryButton" type="submit">保存动作记录</button>
         </form>
       </section>
 
       <section aria-labelledby="history-title">
         <div class="section-row history-title">
-          <h2 id="history-title">最近记录</h2>
+          <h2 id="history-title">训练历史</h2>
           <button class="text-button" id="clearButton" type="button">清空</button>
         </div>
         <div class="history-list" id="historyList"></div>
       </section>
     </main>
 
-    <template id="entryTemplate">
-      <article class="entry-card">
-        <div>
-          <h3></h3>
-          <p class="entry-meta"></p>
-          <p class="entry-note"></p>
-        </div>
-        <div class="entry-side">
+    <template id="sessionTemplate">
+      <article class="session-card">
+        <div class="session-card-head">
+          <div>
+            <h3></h3>
+            <p></p>
+          </div>
           <strong></strong>
-          <button type="button" aria-label="删除记录">删除</button>
         </div>
+        <div class="session-entries"></div>
       </article>
     </template>
 
-    <script src="app.js"></script>
+    <script src="app.js?v=4"></script>
   </body>
 </html>
