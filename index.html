@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f4f7f8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="渐进训练" />
+    <title>渐进训练</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="icon-192.png" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Progressive Overload</p>
+          <h1>渐进训练</h1>
+          <p class="subtitle">每次记录重量，下一次知道该加多少。</p>
+        </div>
+        <div class="plate-mark" aria-hidden="true">
+          <span></span>
+          <strong>kg</strong>
+        </div>
+      </header>
+
+      <section class="panel" aria-labelledby="exercise-title">
+        <div class="section-row">
+          <h2 id="exercise-title">训练动作</h2>
+          <button class="icon-button" id="exportButton" type="button" aria-label="导出记录">⇩</button>
+        </div>
+        <div class="exercise-grid" id="exerciseGrid"></div>
+        <form class="add-exercise" id="exerciseForm">
+          <input id="exerciseInput" autocomplete="off" placeholder="添加动作，比如：罗马尼亚硬拉" />
+          <button type="submit">添加</button>
+        </form>
+      </section>
+
+      <section class="stats-grid" aria-label="训练摘要">
+        <article class="stat">
+          <span>上次</span>
+          <strong id="lastWeight">--</strong>
+        </article>
+        <article class="stat accent">
+          <span>建议下次</span>
+          <strong id="nextWeight">--</strong>
+        </article>
+        <article class="stat">
+          <span>最高</span>
+          <strong id="bestWeight">--</strong>
+        </article>
+      </section>
+
+      <section class="panel" aria-labelledby="new-log-title">
+        <h2 id="new-log-title">新增训练</h2>
+        <form id="entryForm" class="entry-form">
+          <label>
+            <span>重量 kg</span>
+            <input id="weightInput" inputmode="decimal" placeholder="60" required />
+          </label>
+          <label>
+            <span>组数</span>
+            <input id="setsInput" inputmode="numeric" value="3" required />
+          </label>
+          <label>
+            <span>次数</span>
+            <input id="repsInput" inputmode="numeric" value="5" required />
+          </label>
+          <label>
+            <span>RPE</span>
+            <input id="rpeInput" inputmode="decimal" placeholder="8" />
+          </label>
+          <label class="wide">
+            <span>备注</span>
+            <input id="noteInput" autocomplete="off" placeholder="比如：最后一组还剩 1 次余力" />
+          </label>
+          <button class="primary-button" type="submit">保存这次训练</button>
+        </form>
+      </section>
+
+      <section aria-labelledby="history-title">
+        <div class="section-row history-title">
+          <h2 id="history-title">最近记录</h2>
+          <button class="text-button" id="clearButton" type="button">清空</button>
+        </div>
+        <div class="history-list" id="historyList"></div>
+      </section>
+    </main>
+
+    <template id="entryTemplate">
+      <article class="entry-card">
+        <div>
+          <h3></h3>
+          <p class="entry-meta"></p>
+          <p class="entry-note"></p>
+        </div>
+        <div class="entry-side">
+          <strong></strong>
+          <button type="button" aria-label="删除记录">删除</button>
+        </div>
+      </article>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
